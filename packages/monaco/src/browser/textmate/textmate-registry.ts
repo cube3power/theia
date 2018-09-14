@@ -57,6 +57,15 @@ export class TextmateRegistry {
         return this.languageIdToScope.get(languageId);
     }
 
+    getLanguageId(scope: string): string | undefined {
+        for (const key of this.languageIdToScope.keys()) {
+            if (this.languageIdToScope.get(key) === scope) {
+                return key;
+            }
+        }
+        return undefined;
+    }
+
     registerGrammarConfiguration(languageId: string, config: TextmateGrammarConfiguration): void {
         if (this.languageToConfig.has(languageId)) {
             console.warn(new Error(`a registered grammar configuration for '${languageId}' language is overridden`));
